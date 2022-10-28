@@ -14,7 +14,7 @@ RSpec.describe AftershipAdapter, type: :adapter do
         response = adapter.tracking(id)
 
         expect(response.dig('meta', 'code')).to be 200
-        expect(response['data']).not_to be_nil
+        expect(response['data']).to include JSON.parse(success_response)['data']
       end
     end
 

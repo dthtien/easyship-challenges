@@ -24,7 +24,7 @@ describe TrackingsController, type: :controller do
       it do
         expect(adapter_double).to have_received(:tracking).with(shipment.tracking_number)
         expect(response).to have_http_status(:ok)
-        expect(json_response['tracking']).not_to be_empty
+        expect(json_response).to eq success_response['data']
       end
     end
 
@@ -38,7 +38,7 @@ describe TrackingsController, type: :controller do
       it do
         expect(adapter_double).to have_received(:tracking).with(shipment.tracking_number)
         expect(response).to have_http_status(:not_found)
-        expect(json_response['message']).not_to be_empty
+        expect(json_response).to eq failure_response['meta']
       end
     end
   end
