@@ -8,7 +8,6 @@ Attached is a zip with a repo on which we ask you to complete the following task
 - **Test:** To ensure code changes adhere to the desired functionality, please write tests using RSpec
 
 ## Task 1
-k
 The frontend needs to display the items included in a shipment. Write an instance method for `shipment` that groups its associated `shipment_items` by description and returns an array of hashes. The hashes should be ordered by count, in descending or ascending order depending on the `items_order` param.
 
 Given a `shipment` containing following `shipment_items`: 1 Apple Watch, 2 iPhones, and 3 iPads, the function is expected to be able to return:
