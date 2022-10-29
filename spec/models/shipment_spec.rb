@@ -11,7 +11,7 @@ RSpec.describe Shipment, type: :model do
     end
   end
 
-  describe '.group_item_descriptions' do
+  describe '#group_item_descriptions' do
     let(:shipment) { create(:shipment) }
     let(:order) { :desc }
     let(:result) { shipment.group_item_descriptions(order) }
