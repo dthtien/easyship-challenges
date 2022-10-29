@@ -11,7 +11,7 @@ class Shipment < ApplicationRecord
     left_joins(:shipment_items)
       .select(*RENDERING_FIELDS)
       .select('count(shipment_items.id) as items_count')
-      .group(*RENDERING_FIELDS).having('items_count = ?', size || 1)
+      .group(*RENDERING_FIELDS).having('items_count = ?', size)
   }
 
   def group_item_descriptions(order = :desc)
