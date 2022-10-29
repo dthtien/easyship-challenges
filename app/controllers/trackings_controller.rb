@@ -2,6 +2,7 @@
 
 class TrackingsController < ApplicationController
   def show
+    # TODO: Apply pooling to have better response time and save resources
     response = aftership_adapter.tracking(shipment.tracking_number)
 
     meta = response['meta']
