@@ -13,7 +13,7 @@
 - [x] Task 2 https://github.com/dthtien/easyship-challenges/pull/2
 - [x] Task 3: https://github.com/dthtien/easyship-challenges/pull/3
 - [x] Task 4: https://github.com/dthtien/easyship-challenges/pull/4
-- [x] Enhancement: https://github.com/dthtien/easyship-challenges/pull/5
+- [x] Enhancement: https://github.com/dthtien/easyship-challenges/pull/6
 
 
 - [Junior](junior_tasks.md)
