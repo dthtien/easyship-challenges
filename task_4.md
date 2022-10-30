@@ -3,7 +3,7 @@
 ## Motivation
 To keep track of record changes, we need a logging module that saves all record changes for multiple models.
 
-## Approaches: Store change via callback
+## Approach: Capture and store data changes to databse via callback
 
 ### Step 1: create audit Model
 - Migration
