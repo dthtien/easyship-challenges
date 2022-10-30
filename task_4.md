@@ -128,11 +128,11 @@ additional column.
   - Adds additional overhead to the database
 
 ### Alternative solution: Using CDC - Trigger based to identify and tracks changes to data in a database
-Beside of using database triggers, we can use the change data caputure(CDC) to identify and track changes to data in the
+Beside of using database triggers, we can use the [change data caputure(CDC)](https://en.wikipedia.org/wiki/Change_data_capture) to identify and track changes to data in the
 database. With trigger based CDC, the source database system is configured to trigger a nootification when data is
 written or altered within the source database.
 
-I don't have much experience in this approach but this seems suitable to the ETL, ELT data pineline.
+I don't have much experience in this approach but this seems suitable to the [Extract Transform Load (ETL)](https://en.wikipedia.org/wiki/Extract,_transform,_load), [Extract, Load Transform(ELT)](https://en.wikipedia.org/wiki/Extract,_load,_transform) data pineline.
 
 
 ## References
