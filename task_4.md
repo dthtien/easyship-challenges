@@ -90,7 +90,7 @@ end
 class Shipment < ApplicationRecord
   include Audits::Auditable
 
-  auditable :update
+  auditable
 end
 
 # app/models/shipment_items.rb
