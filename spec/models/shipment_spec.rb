@@ -8,6 +8,7 @@ RSpec.describe Shipment, type: :model do
 
       t = described_class.reflect_on_association(:shipment_items)
       expect(t.macro).to eq(:has_many)
+      expect(t.options).to include(dependent: :destroy)
     end
   end
 
