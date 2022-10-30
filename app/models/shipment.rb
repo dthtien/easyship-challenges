@@ -1,4 +1,11 @@
 class Shipment < ApplicationRecord
   belongs_to :company
-  belongs_to :shipment_item
+  has_many :shipment_items
+
+  def group_item_descriptions(order)
+    order ||= :desc
+    shipment_items.group(:description)
+                  .select(:description, 'count(id) as count')
+                  .order("count(id) #{order}")
+  end
 end
