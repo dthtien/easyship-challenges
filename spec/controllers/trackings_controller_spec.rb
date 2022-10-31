@@ -48,11 +48,15 @@ describe TrackingsController, type: :controller do
     end
   end
 
+  def file_fixture_path
+    'spec/fixtures'
+  end
+
   def success_response
-    JSON.parse File.open("#{Rails.root}/spec/fixtures/aftership/get_success_response.json", 'rb').read
+    JSON.parse file_fixture('aftership/get_success_response.json').read
   end
 
   def failure_response
-    JSON.parse File.open("#{Rails.root}/spec/fixtures/aftership/get_failure_response.json", 'rb').read
+    JSON.parse file_fixture('aftership/get_failure_response.json').read
   end
 end
