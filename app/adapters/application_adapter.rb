@@ -5,7 +5,7 @@ class ApplicationAdapter
   private
 
   def url
-    raise 'Undefineed method'
+    raise 'Undefined method'
   end
 
   def parse_body(request)
