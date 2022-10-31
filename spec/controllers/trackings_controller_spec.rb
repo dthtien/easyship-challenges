@@ -24,7 +24,12 @@ describe TrackingsController, type: :controller do
       it do
         expect(adapter_double).to have_received(:tracking).with(shipment.tracking_number)
         expect(response).to have_http_status(:ok)
-        expect(json_response).to eq success_response['data']
+        expect(json_response).to eq({
+          'status' => 'InTransit',
+          'current_location' => 'Singapore Main Office, Singapore(ARAMEX)',
+          'last_checkpoint_message' => 'Received at Operations Facility',
+          'last_checkpoint_time' => 'Monday, 01 February 2016 at 01:00 PM'
+        })
       end
     end
 
