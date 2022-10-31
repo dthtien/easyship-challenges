@@ -22,6 +22,7 @@ end
 group :test do
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'webmock'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

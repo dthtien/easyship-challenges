@@ -5,6 +5,8 @@ Rails.application.routes.draw do
       collection do
         resource :search, only: :create
       end
+
+      resource :tracking, only: :show
     end
   end
 end
