@@ -88,12 +88,8 @@ RSpec.describe Shipment, type: :model do
     let(:items_size) { 0 }
     let(:result) { described_class.query_shipment_by_items_size(items_size) }
     before do
-      3.times do
-        create(:shipment_item, shipment: shipment1, description: 'iPad')
-      end
-      2.times do
-        create(:shipment_item, shipment: shipment2, description: 'iPhone')
-      end
+      create_list(:shipment_item, 3, shipment: shipment1, description: 'iPad')
+      create_list(:shipment_item, 2, shipment: shipment2, description: 'iPhone')
       create(:shipment_item, shipment: shipment3, description: 'Apple Watch')
     end
 
