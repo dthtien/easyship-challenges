@@ -24,7 +24,12 @@ describe TrackingsController, type: :controller do
       it do
         expect(adapter_double).to have_received(:tracking).with(shipment.tracking_number)
         expect(response).to have_http_status(:ok)
-        expect(json_response).to eq success_response['data']
+        expect(json_response).to eq({
+          'status' => 'InTransit',
+          'current_location' => 'Singapore Main Office, Singapore(ARAMEX)',
+          'last_checkpoint_message' => 'Received at Operations Facility',
+          'last_checkpoint_time' => 'Monday, 01 February 2016 at 01:00 PM'
+        })
       end
     end
 
@@ -43,11 +48,15 @@ describe TrackingsController, type: :controller do
     end
   end
 
+  def file_fixture_path
+    'spec/fixtures'
+  end
+
   def success_response
-    JSON.parse File.open("#{Rails.root}/spec/fixtures/aftership/get_success_response.json", 'rb').read
+    JSON.parse file_fixture('aftership/get_success_response.json').read
   end
 
   def failure_response
-    JSON.parse File.open("#{Rails.root}/spec/fixtures/aftership/get_failure_response.json", 'rb').read
+    JSON.parse file_fixture('aftership/get_failure_response.json').read
   end
 end

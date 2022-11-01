@@ -27,18 +27,21 @@ RSpec.describe AftershipAdapter, type: :adapter do
       it do
         response = adapter.tracking(id)
 
-        expect(response.dig('meta', 'code')).to be 404
+        expect(response.dig('meta', 'code')).to be 4004
         expect(response['data']).to be_nil
       end
     end
   end
 
+  def file_fixture_path
+    'spec/fixtures'
+  end
+
   def success_response
-    File.open("#{Rails.root}/spec/fixtures/aftership/get_success_response.json", 'rb').read
+    file_fixture('aftership/get_success_response.json').read
   end
 
   def failure_response
-    File.open("#{Rails.root}/spec/fixtures/aftership/get_failure_response.json", 'rb').read
+    file_fixture('aftership/get_failure_response.json').read
   end
 end
-
