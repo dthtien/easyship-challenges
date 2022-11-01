@@ -1,4 +1,8 @@
 class ShipmentsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound do
+    render json: { message: 'Record not found' }, status: 404
+  end
+
   def index
     @shipments = Shipment.includes(:shipment_items, :company)
   end
