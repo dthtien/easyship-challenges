@@ -5,7 +5,17 @@ class AftershipAdapter < ApplicationAdapter
 
   def tracking(id)
     request = build_tracking_request(id)
-    parse_body http_client.request(request)
+    response = http_client.request(request)
+    if response.code.to_i >= 500
+      {
+        meta: {
+          code: response.code.to_i,
+          message: 'Aftership is not available'
+        }
+      }.with_indifferent_access
+    else
+      parse_body response
+    end
   end
 
   private
