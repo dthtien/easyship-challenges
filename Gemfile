@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.6.10'
 gem 'rails', '~> 6.1.3.1'
 gem 'sqlite3'
 gem 'puma'
