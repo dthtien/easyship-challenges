@@ -5,7 +5,9 @@ describe SearchesController, type: :controller do
 
   describe 'POST create' do
     let(:company) { create(:company) }
-    let!(:shipment) { create(:shipment, company_id: company.id) }
+    let!(:shipment) do
+      create(:shipment, company_id: company.id, created_at: '2021 May 26 at 2:30 PM')
+    end
     let!(:shipment_item) { create(:shipment_item, shipment: shipment, description: 'name') }
 
     let(:json_response) { JSON.parse(response.body) }
@@ -26,7 +28,7 @@ describe SearchesController, type: :controller do
           destination_country: shipment.destination_country,
           tracking_number: shipment.tracking_number,
           slug: shipment.slug,
-          created_at: shipment.created_at.strftime('%Y %B %d at %I:%M (%A)'),
+          created_at: '2021 May 26 at 02:30 PM (Wednesday)',
           items: [
             {
               description: shipment_item.description,
