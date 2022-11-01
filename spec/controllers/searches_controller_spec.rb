@@ -28,7 +28,7 @@ describe SearchesController, type: :controller do
           destination_country: shipment.destination_country,
           tracking_number: shipment.tracking_number,
           slug: shipment.slug,
-          created_at: '2021 May 26 at 02:30 PM (Wednesday)',
+          created_at: '2021 May 26 at 2:30 PM (Wednesday)',
           items: [
             {
               description: shipment_item.description,
