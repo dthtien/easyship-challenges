@@ -8,6 +8,7 @@ RSpec.describe Shipment, type: :model do
 
       t = described_class.reflect_on_association(:shipment_items)
       expect(t.macro).to eq(:has_many)
+      expect(t.options).to include(dependent: :destroy)
     end
   end
 
@@ -16,12 +17,8 @@ RSpec.describe Shipment, type: :model do
     let(:order) { :desc }
     let(:result) { shipment.group_item_descriptions(order) }
     before do
-      3.times do
-        create(:shipment_item, shipment: shipment, description: "iPad")
-      end
-      2.times do
-        create(:shipment_item, shipment: shipment, description: 'iPhone')
-      end
+      create_list(:shipment_item, 3, shipment: shipment, description: 'iPad')
+      create_list(:shipment_item, 2, shipment: shipment, description: 'iPhone')
       create(:shipment_item, shipment: shipment, description: 'Apple Watch')
     end
 
@@ -45,8 +42,7 @@ RSpec.describe Shipment, type: :model do
       end
     end
 
-    context 'when order = asc' do
-      let(:order) { :asc }
+    shared_examples 'orders ascending' do
       specify do
         expect(result.as_json(except: :id)).to eq [
           {
@@ -63,6 +59,23 @@ RSpec.describe Shipment, type: :model do
           },
         ]
       end
+    end
+
+    context 'when order = asc' do
+      let(:order) { :asc }
+
+      it_behaves_like 'orders ascending'
+    end
+
+    context 'when order = nil' do
+      let(:order) { nil }
+      it_behaves_like 'orders ascending'
+    end
+
+    context 'when order is something, not desc nor asc' do
+      let(:order) { 'ABC' }
+
+      it_behaves_like 'orders ascending'
     end
   end
 
