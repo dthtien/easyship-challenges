@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class TrackingsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound do
+    render json: { message: 'Record not found' }, status: 404
+  end
+
   def show
     # TODO: Apply pooling to have better response time and save resources
     response = aftership_adapter.tracking(shipment.tracking_number)
@@ -45,6 +49,6 @@ class TrackingsController < ApplicationController
   end
 
   def shipment
-    @shipment ||= Shipment.find_by(id: params[:shipment_id], company_id: params[:company_id])
+    @shipment ||= Shipment.find_by!(id: params[:shipment_id], company_id: params[:company_id])
   end
 end

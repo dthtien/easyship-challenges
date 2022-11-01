@@ -46,6 +46,17 @@ describe TrackingsController, type: :controller do
         expect(json_response).to eq failure_response['meta']
       end
     end
+
+    context 'when shipment not found' do
+      before do
+        get :show, params: { company_id: 'not-found', shipment_id: 'not-found' }, format: :json
+      end
+
+      it do
+        expect(response).to have_http_status(:not_found)
+        expect(json_response['message']).to eq 'Record not found'
+      end
+    end
   end
 
   def file_fixture_path
