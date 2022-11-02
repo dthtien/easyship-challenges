@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+ItemStruct = Struct.new(:description, :count)
 
 class Shipment < ApplicationRecord
   RENDERING_FIELDS = %w[
@@ -17,7 +18,7 @@ class Shipment < ApplicationRecord
     order = ORDER_DIRS.include?(order) ? order : 'asc'
     if shipment_items.loaded?
       grouped_items = shipment_items.group_by(&:description).map do |description, items|
-        OpenStruct.new({ description: description, count: items.count })
+        ItemStruct.new(description, items.count)
       end
 
       order == 'asc' ? grouped_items.sort_by(&:count) : grouped_items.sort_by(&:count).reverse!
