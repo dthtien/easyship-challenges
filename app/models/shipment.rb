@@ -9,10 +9,7 @@ class Shipment < ApplicationRecord
   ORDER_DIRS = %w[desc asc].freeze
 
   scope :query_shipment_by_items_size, lambda { |size|
-    left_joins(:shipment_items)
-      .select(*RENDERING_FIELDS)
-      .select('count(shipment_items.id) as items_count')
-      .group(*RENDERING_FIELDS).having('items_count = ?', size)
+    left_joins(:shipment_items).where(shipment_items_count: size).distinct
   }
 
   def group_item_descriptions(order = nil)
