@@ -16,9 +16,18 @@ class Shipment < ApplicationRecord
   }
 
   def group_item_descriptions(order = nil)
-    order = ORDER_DIRS.include?(order.to_s.downcase) ? order : 'asc'
-    shipment_items.group(:description)
-                  .select(:description, 'count(id) as count')
-                  .order("count(id) #{order}")
+    order = order.to_s.downcase
+    order = ORDER_DIRS.include?(order) ? order : 'asc'
+    if shipment_items.loaded?
+      grouped_items = shipment_items.group_by(&:description).map do |description, items|
+        OpenStruct.new({ description: description, count: items.count })
+      end
+
+      order == 'asc' ? grouped_items.sort_by(&:count) : grouped_items.sort_by(&:count).reverse!
+    else
+      shipment_items.group(:description)
+                    .select(:description, 'count(id) as count')
+                    .order("count(id) #{order}")
+    end
   end
 end
