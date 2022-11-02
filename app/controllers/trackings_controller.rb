@@ -35,7 +35,7 @@ class TrackingsController < ApplicationController
   end
 
   def parse_data(data)
-    last_checkpoint = data.dig('tracking', 'checkpoints').max { |cp| cp['checkpoint_time'].to_time }
+    last_checkpoint = data.dig('tracking', 'checkpoints').max_by { |cp| cp['checkpoint_time'].to_time }
     {
       status: last_checkpoint['tag'],
       current_location: "#{last_checkpoint['location']}(#{last_checkpoint['slug']&.upcase})",

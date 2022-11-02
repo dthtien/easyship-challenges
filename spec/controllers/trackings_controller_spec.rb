@@ -21,8 +21,11 @@ describe TrackingsController, type: :controller do
         get :show, params: { company_id: shipment.company_id, shipment_id: shipment.id }, format: :json
       end
 
-      it do
+      it 'calls service correctly'do
         expect(adapter_double).to have_received(:tracking).with(shipment.tracking_number)
+      end
+
+      it 'responds correctly' do
         expect(response).to have_http_status(:ok)
         expect(json_response).to eq({
           'status' => 'InTransit',
